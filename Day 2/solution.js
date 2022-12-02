@@ -36,36 +36,28 @@ function partOne(rounds) {
     if (player === opponent) {
       if (player === Using.Rock) {
         finalScore += 1 // Using Rock
-        finalScore += 3 // Draw Outcome
       } else if (player === Using.Paper) {
         finalScore += 2 // Using Paper
-        finalScore += 3 // Draw Outcome
       } else {
         finalScore += 3 // Using Scissors
-        finalScore += 3 // Draw Outcome
       }
+      finalScore += 3 // Draw Outcome
     } else {
       if (player === Using.Rock) {
-        if (opponent === Using.Paper) {
-          finalScore += 1 // Using Rock
-        } else {
-          finalScore += 1 // Using Rock
+        if (opponent === Using.Scissors) {
           finalScore += 6 // Win Outcome
         }
+        finalScore += 1 // Using Rock
       } else if (player === Using.Paper) {
         if (opponent === Using.Rock) {
-          finalScore += 2 // Using Paper
           finalScore += 6 // Win Outcome
-        } else {
-          finalScore += 2 // Using Paper
         }
+        finalScore += 2 // Using Paper
       } else {
-        if (opponent === Using.Rock) {
-          finalScore += 3 // Using Scissors
-        } else {
-          finalScore += 3 // Using Scissors
+        if (opponent === Using.Paper) {
           finalScore += 6 // Win Outcome
         }
+        finalScore += 3 // Using Scissors
       }
     }
   })
@@ -82,14 +74,12 @@ function partTwo(rounds) {
     if (player === NeedsTo.Draw) {
       if (opponent === Using.Rock) {
         finalScore += 1 // Using Rock
-        finalScore += 3 // Draw Outcome
       } else if (opponent === Using.Paper) {
         finalScore += 2 // Using Paper
-        finalScore += 3 // Draw Outcome
       } else {
         finalScore += 3 // Using Scissors
-        finalScore += 3 // Draw Outcome
       }
+      finalScore += 3 // Draw Outcome
     } else if (player === NeedsTo.Lose) {
       if (opponent === Using.Paper) {
         finalScore += 1 // Using Rock
@@ -101,14 +91,12 @@ function partTwo(rounds) {
     } else {
       if (opponent === Using.Scissors) {
         finalScore += 1 // Using Rock
-        finalScore += 6 // Win Outcome
       } else if (opponent === Using.Rock) {
         finalScore += 2 // Using Paper
-        finalScore += 6 // Win Outcome
       } else {
         finalScore += 3 // Using Scissors
-        finalScore += 6 // Win Outcome
       }
+      finalScore += 6 // Win Outcome
     }
   })
 
