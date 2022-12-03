@@ -5,3 +5,5 @@
 ![](https://img.shields.io/badge/Days%20Completed-3-blue)
 
 🎄 2022 Advent of Code Solutions by **Braeden Kilburn**
+
+<!--- advent_readme_stars table --->
