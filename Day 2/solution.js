@@ -16,6 +16,8 @@ const fs = require('fs')
 // File path
 const FILE_PATH = './input.txt'
 
+const start = Date.now()
+
 // Read the input file.
 const input = fs.readFileSync(FILE_PATH, 'utf8').trim()
 
@@ -23,6 +25,9 @@ const rounds = input.split('\n')
 
 partOne(rounds)
 partTwo(rounds)
+
+const end = Date.now()
+console.log(`⏰ The script took ${end - start}ms to run.`)
 
 function partOne(rounds) {
   let finalScore = 0
