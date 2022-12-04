@@ -28,12 +28,8 @@ console.log(
 console.log(`⏰ The script took ${end - start}ms to run.`)
 
 function getAssignments(elf) {
-  const [start, end] = elf.split('-').map((num) => parseInt(num))
-  const assignments = []
-  for (let i = start; i <= end; i++) {
-    assignments.push(i)
-  }
-  return assignments
+  const [start, end] = elf.split('-').map(Number)
+  return [...Array(end - start + 1).keys()].map((i) => start + i)
 }
 
 function partOne(pairs) {
