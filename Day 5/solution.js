@@ -1,21 +1,74 @@
-// The fs module is required to read files.
-const fs = require('fs')
+const { readFileSync } = require('fs')
 
-// File path
-const FILE_PATH = './input.txt'
+const lines = readFileSync('input.txt', { encoding: 'utf-8' }) // read day??.txt content
+  .replace(/\r/g, '') // remove all \r characters to avoid issues on Windows
+  .trimEnd() // Remove ending whitespace
 
-// Read the input file.
-const input = fs.readFileSync(FILE_PATH, 'utf8').trim()
+const [rawStacks, rawMoves] = lines.split('\n\n').map((x) => x.split('\n'))
 
-// Start timer
-const start = Date.now()
+const parsedStacks = rawStacks.map((line) =>
+  [...line].filter((value, index) => index % 4 === 1),
+)
 
-// End timer
-const end = Date.now()
+const indexes = parsedStacks.pop() // Last element is the indexes
 
-// Print the results
-console.log(`⏰ The script took ${end - start}ms to run.`)
+const stacks = {}
 
-function partOne() {}
+for (const line of parsedStacks) {
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] !== ' ') {
+      // Add line[i] to the stack indexes[i]
+      if (!stacks[indexes[i]]) {
+        stacks[indexes[i]] = []
+      }
+      stacks[indexes[i]].unshift(line[i])
+    }
+  }
+}
 
-function partTwo() {}
+const moves = []
+for (const move of rawMoves) {
+  const match = /move (\d+) from (\d+) to (\d+)/g.exec(move)
+  moves.push({
+    count: parseInt(match[1]),
+    from: parseInt(match[2]),
+    to: parseInt(match[3]),
+  })
+}
+
+function part1() {
+  const localStacks = JSON.parse(JSON.stringify(stacks))
+  for (const move of moves) {
+    for (let i = 0; i < move.count; i++) {
+      const crate = localStacks[move.from].pop()
+      localStacks[move.to].push(crate)
+    }
+  }
+  console.log(
+    indexes
+      .map((value) => {
+        const stack = localStacks[value]
+        return stack[stack.length - 1]
+      })
+      .join(''),
+  )
+}
+
+function part2() {
+  const localStacks = JSON.parse(JSON.stringify(stacks))
+  for (const move of moves) {
+    const crates = localStacks[move.from].splice(-move.count, move.count)
+    localStacks[move.to] = localStacks[move.to].concat(crates)
+  }
+  console.log(
+    indexes
+      .map((value) => {
+        const stack = localStacks[value]
+        return stack[stack.length - 1]
+      })
+      .join(''),
+  )
+}
+
+part1()
+part2()
