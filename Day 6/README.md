@@ -8,6 +8,8 @@ However, because he's heard you have significant experience dealing with signal-
 
 As if inspired by comedic timing, the device emits a few colorful sparks.
 
+## Part One
+
 To be able to communicate with the Elves, the device needs to lock on to their signal. The signal is a series of seemingly-random characters that the device receives one at a time.
 
 To fix the communication system, you need to add a subroutine to the device that detects a start-of-packet marker in the datastream. In the protocol being used by the Elves, the start of a packet is indicated by a sequence of four characters that are all different.
@@ -32,3 +34,19 @@ Here are a few more examples:
 `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 11
 
 **How many characters need to be processed before the first start-of-packet marker is detected?**
+
+## Part Two
+
+Your device's communication system is correctly detecting packets, but still isn't working. It looks like it also needs to look for messages.
+
+A start-of-message marker is just like a start-of-packet marker, except it consists of 14 distinct characters rather than 4.
+
+Here are the first positions of start-of-message markers for all of the above examples:
+
+`mjqjpqmgbljsphdztnvjfqwrcgsmlb`: first marker after character 19
+`bvwbjplbgvbhsrlpgdmjqwftvncz`: first marker after character 23
+`nppdvjthqldpwncqszvftbrmjlhg`: first marker after character 23
+`nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: first marker after character 29
+`zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 26
+
+**How many characters need to be processed before the first start-of-message marker is detected?**
