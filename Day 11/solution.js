@@ -5,7 +5,7 @@ const Queue = require('./queue')
 const fs = require('fs')
 
 // File path
-const FILE_PATH = './test.txt'
+const FILE_PATH = './input.txt'
 
 // Read the input file.
 const input = fs.readFileSync(FILE_PATH, 'utf8').trim()
@@ -31,8 +31,6 @@ function beginMonkeyMadness(input, rounds, relief) {
     letMonkeysPlay(monkeys, relief).forEach((inspectionCount, index) => {
       inspectionCounts[index] += inspectionCount
     })
-
-    console.log(`🐒 After round ${round + 1}: ${inspectionCounts.join(', ')}`)
   }
 
   const max = Math.max(...inspectionCounts)
@@ -73,7 +71,7 @@ function createMonkey(monkey) {
   const ifTrue = parseInt(ifTrueString.split(' ')[5])
   const ifFalse = parseInt(ifFalseString.split(' ')[5])
 
-  return new Monkey(id, items, operation, test, ifTrue, ifFalse)
+  return new Monkey(id, items, operation, test, divideConstant, ifTrue, ifFalse)
 }
 
 function buildOperation(string) {
@@ -98,6 +96,9 @@ function letMonkeysPlay(monkeys, relief) {
       let worryLevel = monkey.operation(item)
 
       if (relief) worryLevel = Math.floor(worryLevel / 3)
+      else
+        worryLevel =
+          worryLevel % monkeys.reduce((acc, m) => (acc *= m.divideConstant), 1)
 
       if (monkey.test(worryLevel)) {
         monkeys[monkey.isTrue].items.enqueue(worryLevel)
